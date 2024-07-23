@@ -1,7 +1,7 @@
 # __init__.py
 
 def token(token):
-    self.token = token
+    token = token
 
 import socket
 import json
