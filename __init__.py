@@ -1,6 +1,6 @@
 # __init__.py
 
-def token(self, token):
+def token(token):
     self.token = token
 
 import socket
