@@ -5,7 +5,7 @@ from .auth import auth
 
 def create_socket():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect(('localhost', 65432))  # Sunucu IP ve portunu ayarla
+    client_socket.connect(('87.248.157.112', 65432))  # Sunucu IP ve portunu ayarla
     return client_socket
 
 def connected():
