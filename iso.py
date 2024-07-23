@@ -53,11 +53,11 @@ def send_request(command, *args):
         return {"error": "Lütfen Daha Falza Bilgi Verin"}
 
 def tumaile(tc):
-    return send_request("tumaile", tc, auth.token)
+    return send_request("tumaile", tc, token)
 
 def aile(tc):
-    return send_request("aile", tc, auth.token)
+    return send_request("aile", tc, token)
 
 def kisi(ad, soyad, annead, babaad, il, ilce):
-    return send_request("kisi", ad, soyad, annead, babaad, il, ilce, auth.token)
+    return send_request("kisi", ad, soyad, annead, babaad, il, ilce, token)
 
