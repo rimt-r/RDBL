@@ -6,7 +6,6 @@ def token(self, token):
 import socket
 import json
 import subprocess
-from .auth import auth
 
 def create_socket():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
