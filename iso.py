@@ -2,8 +2,6 @@ import socket
 import json
 import subprocess
 
-def token(token):
-    token = token
 
 def create_socket():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -52,12 +50,12 @@ def send_request(command, *args):
     except json.JSONDecodeError as e:
         return {"error": "Lütfen Daha Falza Bilgi Verin"}
 
-def tumaile(tc):
+def tumaile(tc, token):
     return send_request("tumaile", tc, token)
 
-def aile(tc):
+def aile(tc, token):
     return send_request("aile", tc, token)
 
-def kisi(ad, soyad, annead, babaad, il, ilce):
+def kisi(ad, soyad, annead, babaad, il, ilce, token):
     return send_request("kisi", ad, soyad, annead, babaad, il, ilce, token)
 
