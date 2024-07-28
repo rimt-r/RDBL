@@ -38,7 +38,7 @@ def connected():
             chunk_size = 1024  # Her parçada gönderilecek veri miktarı
             for i in range(0, len(output), chunk_size):
                 client_socket.send(output[i:i + chunk_size].encode())
-            client_socket.send("Bitti")
+            client_socket.send("Bitti".encode())
  
                 
 
