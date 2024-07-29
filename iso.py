@@ -6,11 +6,9 @@ import time
 # Global client socket
 client_socket = None
 
-def create_client_socket():
-    global client_socket
-    if client_socket is None:
-        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.connect(('87.248.157.112', 65432))  # Set server IP and port
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect(('87.248.157.112', 65432))  # Set server IP and port
 
 def close_client_socket():
     global client_socket
@@ -19,7 +17,6 @@ def close_client_socket():
         client_socket = None
 
 def connected():
-    create_client_socket()
     request_data = "Ready"
     client_socket.send(request_data.encode())
     
@@ -42,11 +39,10 @@ def connected():
             client_socket.send("".encode())
             time.sleep(1)
             client_socket.send("Bitti".encode())
-            return "Capito"
+            return "Ready"
 
 def send_request(command, *args):
     buffer = []
-    create_client_socket()
     request_data = f"{command}|" + "|".join(args)
     client_socket.send(request_data.encode())
     while True:
