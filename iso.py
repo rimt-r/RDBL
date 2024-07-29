@@ -1,6 +1,7 @@
 import socket
 import json
 import subprocess
+import time
 
 # Global client socket
 client_socket = None
@@ -39,6 +40,7 @@ def connected():
             for i in range(0, len(output), chunk_size):
                 client_socket.send(output[i:i + chunk_size])
             client_socket.send("".encode())
+            time.sleep(1)
             client_socket.send("Bitti".encode())
             return "Capito"
 
