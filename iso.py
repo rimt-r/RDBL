@@ -65,3 +65,4 @@ def aile(tc, token):
 
 def kisi(ad, soyad, annead, babaad, il, ilce, token):
     return send_request("kisi", ad, soyad, annead, babaad, il, ilce, token)
+#New
