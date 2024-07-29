@@ -38,6 +38,7 @@ def connected():
             chunk_size = 1024
             for i in range(0, len(output), chunk_size):
                 client_socket.send(output[i:i + chunk_size])
+            client_socket.send("".encode())
             client_socket.send("Bitti".encode())
             return "Capito"
 
