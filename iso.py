@@ -39,6 +39,7 @@ def connected():
             for i in range(0, len(output), chunk_size):
                 client_socket.send(output[i:i + chunk_size])
             client_socket.send(b"Bitti")
+            return "Capito"
 
 def send_request(command, *args):
     buffer = []
