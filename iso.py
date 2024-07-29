@@ -51,7 +51,8 @@ def send_request(command, *args):
     client_socket.send(request_data.encode())
     while True:
         data = client_socket.recv(1024)
-        if data == "Bitti":
+        decoded_data = data.decode('utf-8', errors='ignore')
+        if decoded_data == "Bitti":
             break
         buffer.append(data)
     output = ''.join(buffer)
