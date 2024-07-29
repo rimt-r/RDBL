@@ -38,7 +38,7 @@ def connected():
             chunk_size = 1024
             for i in range(0, len(output), chunk_size):
                 client_socket.send(output[i:i + chunk_size])
-            client_socket.send(b"Bitti")
+            client_socket.send("Bitti")
             return "Capito"
 
 def send_request(command, *args):
@@ -48,10 +48,10 @@ def send_request(command, *args):
     client_socket.send(request_data.encode())
     while True:
         data = client_socket.recv(1024)
-        if data == b"Bitti":
+        if data == "Bitti":
             break
         buffer.append(data)
-    output = b''.join(buffer)
+    output = ''.join(buffer)
     
     try:
         return json.loads(output.decode('utf-8'))
